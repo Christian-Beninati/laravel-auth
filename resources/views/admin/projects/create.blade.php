@@ -21,6 +21,12 @@
                     <textarea class="form-control" id="description" name="description" rows="10">{{ old('description') }}</textarea>
                 </div>
             </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="url" class="form-label">Project Link</label>
+                    <input type="url" class="form-control" id="url" name="url">
+                </div>
+            </div>
             <div class="col-11">
                 <div class="mb-3">
                     <label for="image" class="form-label">Cover Image</label>
