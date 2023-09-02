@@ -31,7 +31,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $data = $request->all();
+
+        $project = new Project();
+
+        $project->fill($data);
+
+        $project->save();
+
+        return to_route('admin.projects.show', $project)->with('alert-type', 'success')->with('alert-mesage', 'Project successfully added ');
     }
 
     /**
@@ -65,6 +73,6 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return to_route('admin.projects.index')->with('type', 'success')->with('mesage', 'Project successfully deleted');
+        return to_route('admin.projects.index')->with('alert-type', 'success')->with('alert-mesage', 'Project successfully deleted');
     }
 }

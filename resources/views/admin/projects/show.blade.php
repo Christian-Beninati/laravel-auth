@@ -9,7 +9,7 @@
     <hr>
 
     <div class="clearfix">
-        <img class="float-start me-2" src="{{ $project->image }}" alt="{{ $project->title }}">
+        <img class="img-fluid float-start me-2" src="{{ $project->image }}" alt="{{ $project->title }}" width="250">
         <p>{{ $project->description }}</p>
     </div>
     <div>
