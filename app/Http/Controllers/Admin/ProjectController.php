@@ -39,7 +39,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return to_route('admin.projects.show', $project)->with('alert-type', 'success')->with('alert-mesage', 'Project successfully added ');
+        return to_route('admin.projects.show', $project)->with('alert-type', 'success')->with('alert-message', 'Project successfully added ');
     }
 
     /**
@@ -73,6 +73,6 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return to_route('admin.projects.index')->with('alert-type', 'success')->with('alert-mesage', 'Project successfully deleted');
+        return to_route('admin.projects.index')->with('alert-type', 'success')->with('alert-message', 'Project successfully deleted');
     }
 }
