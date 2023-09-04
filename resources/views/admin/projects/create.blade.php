@@ -5,8 +5,8 @@
 @section('content')
     <header>
         <h1>Create Project</h1>
-        <a href="btn bn-sm btn-secondary" href="{{ route('admin.projects.index') }}">
-            <i class="fas fa-arrow-fef me-2"></i>
+        <a href="{{ route('admin.projects.index') }}" class="btn bn-sm btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>
             Go back
         </a>
     </header>
