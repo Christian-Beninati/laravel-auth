@@ -9,7 +9,9 @@
     <hr>
 
     <div class="clearfix">
-        <img class="img-fluid float-start me-2" src="{{ $project->image }}" alt="{{ $project->title }}" width="250">
+        @if ($project->image)
+            <img class="img-fluid float-start me-2" src="{{ $project->image }}" alt="{{ $project->title }}" width="250">
+        @endif
         <p>{{ $project->description }}</p>
     </div>
     <div>
