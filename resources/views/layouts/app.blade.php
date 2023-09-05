@@ -39,7 +39,7 @@
 
 
         <main class="container mt-3">
-            @include('includes.layout.alert')
+            @include('includes.layout.alerts')
 
             @yield('content')
         </main>

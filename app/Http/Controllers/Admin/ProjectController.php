@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 
 class ProjectController extends Controller
@@ -32,6 +33,24 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'title' => 'required|string|unique:projects',
+                'url' => 'required|unique:projects|url:http,https',
+                'image' => 'nullable|url',
+                'description' => 'nullable|string',
+            ],
+            [
+                'title.required' => ' Title is required',
+                'title.unique' => " There is already a project called $request->title",
+                'url.required' => ' Title is required',
+                'url.unique' => " This link already exists  $request->url",
+                'url.url' => ' The link is not valid',
+                'description.required' => 'There can be no project without a description',
+                'image.url' => 'The url entered is invalid',
+            ]
+        );
+
         $data = $request->all();
 
         $project = new Project();
@@ -64,6 +83,24 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        $request->validate(
+            [
+                'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id)],
+                'url' => ['required', 'url:http,https', Rule::unique('projects')->ignore($project->id)],
+                'image' => 'nullable|url',
+                'description' => 'nullable|string',
+            ],
+            [
+                'title.required' => ' Title is required',
+                'title.unique' => " There is already a project called $request->title",
+                'url.required' => ' Title is required',
+                'url.unique' => " This link already exists $request->url",
+                'url.url' => ' The link is not valid',
+                'description.required' => 'There can be no project without a description',
+                'image.url' => 'The url entered is invalid',
+            ]
+        );
+
         // dd($request->all());
         $data = $request->all();
         $project->update($data);
