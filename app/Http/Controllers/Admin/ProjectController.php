@@ -37,7 +37,7 @@ class ProjectController extends Controller
             [
                 'title' => 'required|string|unique:projects',
                 'url' => 'required|unique:projects|url:http,https',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image:jpg,jpeg,png',
                 'description' => 'nullable|string',
             ],
             [
@@ -47,7 +47,7 @@ class ProjectController extends Controller
                 'url.unique' => " This link already exists  $request->url",
                 'url.url' => ' The link is not valid',
                 'description.required' => 'There can be no project without a description',
-                'image.url' => 'The url entered is invalid',
+                'image.image' => 'The uploaded file is not valid',
             ]
         );
 
@@ -87,7 +87,7 @@ class ProjectController extends Controller
             [
                 'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id)],
                 'url' => ['required', 'url:http,https', Rule::unique('projects')->ignore($project->id)],
-                'image' => 'nullable|url',
+                'image' => 'nullable|image:jpg,jpeg,png',
                 'description' => 'nullable|string',
             ],
             [
@@ -97,7 +97,7 @@ class ProjectController extends Controller
                 'url.unique' => " This link already exists $request->url",
                 'url.url' => ' The link is not valid',
                 'description.required' => 'There can be no project without a description',
-                'image.url' => 'The url entered is invalid',
+                'image.image' => 'The uploaded file is not valid',
             ]
         );
 
