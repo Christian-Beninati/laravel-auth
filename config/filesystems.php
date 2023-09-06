@@ -16,9 +16,9 @@ return [
     'default' => env('FILESYSTEM_DISK', 'public'),
 
     /*
-    |--------------------------------------------------------------------------
+    |---------------------------------------------------------------------------
     | Filesystem Disks
-    |--------------------------------------------------------------------------
+    |---------------------------------------------------------------------------
     |
     | Here you may configure as many filesystem "disks" as you wish, and you
     | may even configure multiple disks of the same driver. Defaults have
