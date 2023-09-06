@@ -16,5 +16,5 @@
 @endsection
 
 @section('scripts')
-    @vite('resources/js/image-preview')
+    {{-- @vite('resources/js/image-preview') --}}
 @endsection

@@ -1,11 +1,11 @@
 @if ($project->exists)
     {{-- I am in an editing form --}}
-    <form method="POST" action="{{ route('admin.projects.update', $project) }}"novalidate>
+    <form method="POST" action="{{ route('admin.projects.update', $project) }}" enctype="multipart/form-data" novalidate>
 
         @method('PUT')
     @else
         {{-- I am in a creationform --}}
-        <form method="POST" action="{{ route('admin.projects.store') }}"novalidate>
+        <form method="POST" action="{{ route('admin.projects.store') }}" enctype="multipart/form-data" novalidate>
 @endif
 @csrf
 <div class="row">
@@ -51,10 +51,9 @@
     <div class="col-11">
         <div class="mb-3">
             <label for="image" class="form-label">Cover Image</label>
-            <input type="url"
+            <input type="file"
                 class="form-control @error('image') is-invalid @elseif(old('image')) is-valid @enderror"
-                id="image" name="image" value="{{ old('image', $project->image) }}"
-                placeholder="Enter a valid url">
+                id="image" name="image" placeholder="Enter a valid url">
             @error('image')
                 <div class="invalid-feedback">
                     {{ $message }}
