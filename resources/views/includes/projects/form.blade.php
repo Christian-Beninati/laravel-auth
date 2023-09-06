@@ -62,8 +62,8 @@
         </div>
     </div>
     <div class="col-1">
-        <img src="{{ old('image', $project->imaage ?? 'https://marcolanci.it/utils/placeholder.jpg') }}" alt="Preview"
-            class="img-fluid" id="image-preview">
+        <img src="{{ $project->image ? $project->getImagePath() : 'https://marcolanci.it/utils/placeholder.jpg' }}"
+            alt="Preview" class="img-fluid" id="image-preview">
     </div>
 </div>
 <hr>

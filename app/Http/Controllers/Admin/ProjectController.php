@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 
@@ -53,7 +54,13 @@ class ProjectController extends Controller
 
         $data = $request->all();
 
+
         $project = new Project();
+
+        if (array_key_exists('image', $data)) {
+            $img_url = Storage::putFile('post_images', $data['image']);
+            $data['image'] = $img_url;
+        }
 
         $project->fill($data);
 
@@ -101,8 +108,14 @@ class ProjectController extends Controller
             ]
         );
 
-        // dd($request->all());
         $data = $request->all();
+
+        if (array_key_exists('image', $data)) {
+            if ($project->image) Storage::delete($project->image);
+            $img_url = Storage::putFile('post_images', $data['image']);
+            $data['image'] = $img_url;
+        }
+
         $project->update($data);
 
         return to_route('admin.projects.show', $project)->with('alert-message', 'Successfully modified project')->with('alert-type', 'success');
@@ -116,5 +129,14 @@ class ProjectController extends Controller
         $project->delete();
 
         return to_route('admin.projects.index')->with('alert-type', 'success')->with('alert-message', 'Project successfully deleted');
+    }
+
+    public function forceDelete($id)
+    {
+        $project = Project::onlyTrashed()->find($id);
+        if (!$project) return to_route('admin.projects.index')->with('alert-type', 'danger')->with('alert-message', 'Project not found');
+
+        if ($project->image) Storage::delete($project->image);
+        $project->forceDelete();
     }
 }
